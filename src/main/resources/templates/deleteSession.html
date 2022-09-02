@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <center>
+        <div class="card" style="width:600px;margin:10px;padding:10px;">
+            <h1>Deletar sessão</h1>
+            <hr>
+                <div>
+                    <label class="form-label" style="float:left;">Sessão</label>
+                    <select name="genre" id="genre" class="form-control">
+                                
+                    </select>
+                    <p>Filme: <span id="movie-title"></span></p>
+                    <p>Sala: <span id="room"></span></p>
+                    <p>Dimensão: <span id="dimension"></span></p>
+                    <p>Legendado ou dublado: <span id="subtitled-or-subbed"></span></p>
+                </div>
+                <button id="submit-button" class="btn btn-primary" style="margin-top:10px;">Deletar sessão</button>
+                <a href="http://localhost:8080/view/index">Voltar</a>
+        </div>
+    </center>
+    <script>
+        const listSessions = async ()=>{
+            const request = await fetch("http://localhost:8080/sessions")
+            const response = await request.json()
+            console.log(response)
+        }
+        window.onload = async (event)=>{
+            listSessions()
+            document.getElementById("submit-button").onclick = ()=>{
+
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Cinema</a>
+        </div>
+    </nav>
+    <div style="padding:10px">
+        <h1>Sessões disponíveis</h1>
+        <hr>
+        <div class="alert alert-info" style="display:none;" id="no-session-alert" role="alert">
+            Nenhuma sessão encontrada.
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Gerenciar filme</h3>
+                    </div>
+                    <div class="card-body">
+                        <select name="" id="movie-view-select" class="form-control">
+                            <option value="http://localhost:8080/view/movies/add">Adicionar filme</option>
+                            <option value="http://localhost:8080/view/movies/update">Modificar filme</option>
+                            <option value="http://localhost:8080/view/movies/delete">Remover filme</option>
+                        </select>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" onclick="window.location.href=document.getElementById('movie-view-select').value">Ir</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Gerenciar sessão</h3>
+                    </div>
+                    <div class="card-body">
+                        <select name="" id="session-view-select" class="form-control">
+                            <option value="http://localhost:8080/view/sessions/add">Adicionar sessão</option>
+                            <option value="http://localhost:8080/view/sessions/update">Modificar sessão</option>
+                            <option value="http://localhost:8080/view/sessions/delete">Remover sessão</option>
+                        </select>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" onclick="window.location.href=document.getElementById('session-view-select').value">Ir</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Gerenciar sala</h3>
+                    </div>
+                    <div class="card-body">
+                        
+                        <select name="" id="room-view-select" class="form-control">
+                            <option value="http://localhost:8080/view/rooms/add">Adicionar sala</option>
+                            <option value="http://localhost:8080/view/rooms/delete">Remover sala</option>
+                        </select>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" onclick="window.location.href=document.getElementById('room-view-select').value">Ir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sessions">
+            
+        </div>
+    </div>
+    <script>
+        window.addEventListener("load", async (event)=>{
+            const request = await fetch("http://localhost:8080/sessions")
+            const response = await request.json()
+            if(response.length == 0){
+                document.getElementById("no-session-alert").style.display = "block";
+            }else{
+                for(let i = 0 ; i < response.length; i++){
+                    let sessionCard = document.createElement("div")
+                    sessionCard.classList.add("card")
+                    sessionCard.style.marginTop = "10px";
+                    sessionCard.innerHTML = `
+                        <div class="card-header">
+                            <h3>Filme:${response[i][0]}</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Dados da sessão</p>
+                            <ul>
+                                <li>Dublado ou legendado: ${response[i][2]}</li>
+                                <li>Dimensão: ${response[i][3]}</li>
+                                <li>Horário da sessão: ${response[i][4]}</li>
+                            </ul>
+                        </div>
+                    `
+                    document.getElementById("sessions").appendChild(sessionCard)
+                }
+                //console.log(response)
+            }
+        })
+    </script>
+</body>
+</html>

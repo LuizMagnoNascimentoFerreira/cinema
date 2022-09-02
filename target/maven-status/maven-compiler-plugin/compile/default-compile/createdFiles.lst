@@ -1,0 +1,15 @@
+org\example\service\MovieService.class
+org\example\service\RoomService.class
+org\example\controller\FrontController.class
+org\example\controller\RoomController.class
+org\example\service\SessionService.class
+org\example\configuration\CORSConfiguration.class
+org\example\controller\MovieController.class
+org\example\model\entity\Room.class
+org\example\repository\SessionRepository.class
+org\example\model\entity\Session.class
+org\example\App.class
+org\example\controller\SessionController.class
+org\example\model\entity\Movie.class
+org\example\repository\MovieRepository.class
+org\example\repository\RoomRepository.class
